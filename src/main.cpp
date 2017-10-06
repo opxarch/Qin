@@ -36,6 +36,8 @@
 #include "midi/mapping.h"
 #include "mididev/mididev.h"
 
+#define DEBUG_LEVEL 0
+
 ////////////////////////////////////////////////////////////////////////////////
 
 
@@ -79,6 +81,7 @@ int main(int argc, char *argv[])
           int channels = wavetable->GetChannels();
           int format = wavetable->GetSampleFormat();
           int samplesize = bps / 8;
+          float delay = 50.0f; //ms
           int oriFormat = format;
           bool needResample = false;
 
@@ -97,7 +100,7 @@ int main(int argc, char *argv[])
            * Try to open the audio system.
            */
           audiosys::IAudioOutput *ao = 0;
-          rc = audiosys->initDevice(&ao, "dsound", rate, channels, format, 0);
+          rc = audiosys->initDevice(&ao, "dsound", rate, channels, format, delay, 0);
 
           /*
            * We have failed on it as the format was not supported.
@@ -108,7 +111,7 @@ int main(int argc, char *argv[])
             {
               format = AF_FORMAT_S16_LE;
               needResample = true;
-              rc = audiosys->initDevice(&ao, "dsound", rate, channels, format, 0);
+              rc = audiosys->initDevice(&ao, "dsound", rate, channels, format, delay, 0);
             }
 
           if (V_FAILURE(rc))
@@ -240,7 +243,7 @@ int main(int argc, char *argv[])
               //rc = effects->add(effect::EFFECT_SCOPE_INSTRUMENT, effect::AmplifierImpl(rate, channels));
               //rc = effects->add(effect::EFFECT_SCOPE_INSTRUMENT, effect::FilterImpl(rate, channels));
               //rc = effects->add(effect::EFFECT_SCOPE_INSTRUMENT, effect::DelayImpl(rate, channels));
-              rc = effects->add(effect::EFFECT_SCOPE_INSTRUMENT, effect::InverterImpl(rate, channels));
+              //rc = effects->add(effect::EFFECT_SCOPE_INSTRUMENT, effect::InverterImpl(rate, channels));
 
               if (V_FAILURE(rc))
                 {
@@ -254,7 +257,10 @@ int main(int argc, char *argv[])
               }
 
               midi::Event event;
+#if DEBUG_LEVEL > 1
               std::string msg;
+#endif
+              int eventPoly;
 
               bool end = false;
 
@@ -279,17 +285,19 @@ int main(int argc, char *argv[])
                       rc = ports->queuePop(event);
                       if (V_SUCCESS(rc))
                         {
+#if DEBUG_LEVEL > 1
                           formatMidiMessage(msg, event);
                           LOG(INFO) << msg << "\n";
-
-                          rc = wavetable->SendMIDIEvent(event);
+#endif
+                          rc = wavetable->SendMIDIEvent(event, &eventPoly);
                           if (V_FAILURE(rc))
                             {
                               LOG(ERR) << "send MIDI event.\n";
                               return 1;
                             }
 
-                          ao->resume();
+                          // send it to effectors
+                          effects->groupGate(eventPoly, true);
                         }
 
                       padsize = (targetsize > MAX_OUTBURST)?MAX_OUTBURST:targetsize;
@@ -320,8 +328,8 @@ int main(int argc, char *argv[])
                               return 1;
                             }
                           outn = outlen / sizeof(Sample_t);
-clock_t clk0, clk1;
-clk0 = clock();
+//clock_t clk0, clk1;
+//clk0 = clock();
                           /*
                            * Rendering the audio data from each channel,
                            * Specifically, processing the 1st channel to fill in
@@ -336,13 +344,16 @@ clk0 = clock();
                             {
                               for (int nPoly = polySum -1; nPoly; nPoly--)
                                 {
+                                  if (!wavetable->PipeBusy(nPoly))
+                                    continue;
+
                                   rc = wavetable->ReadPipeChannel(nPoly, ori, samples2, outn);
                                   if (V_FAILURE(rc)) break;
 
                                   rc = effects->processGroup(nPoly, samples2, outn, channels);
                                   if (V_FAILURE(rc))
                                     {
-                                      LOG(ERR) << "ADSR\n";
+                                      LOG(ERR) << "Process the group insert effectors.\n";
                                       return 1;
                                     }
 
@@ -398,7 +409,7 @@ clk0 = clock();
                               LOG(ERR) << "failed on re-sampling.\n";
                               return 1;
                             }
-clk1 = clock();
+//clk1 = clock();
 //if (clk1 - clk0)
 //  LOG(INFO) << "max process time = " << clk1 - clk0 << " ms.\n";
 

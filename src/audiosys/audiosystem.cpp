@@ -111,7 +111,7 @@ AudioSystem::dumpDeviceList(void)
  * @return  status code.
  */
 int
-AudioSystem::initDevice(IAudioOutput **ao, const char *name, int rate, int channels, int format, int flags)
+AudioSystem::initDevice(IAudioOutput **ao, const char *name, int rate, int channels, int format, float delay, int flags)
 {
   int rc;
   int i = 0;
@@ -124,7 +124,7 @@ AudioSystem::initDevice(IAudioOutput **ao, const char *name, int rate, int chann
       if (!strncmp(buf, name, strlen(buf)))
         {
           /* name matches, try it */
-          rc = audio_out->init(rate,channels,format,flags);
+          rc = audio_out->init(rate,channels,format,delay,flags);
           if (V_SUCCESS(rc))
             {
               *ao = audio_out; /* succeeded! */
@@ -140,7 +140,7 @@ AudioSystem::initDevice(IAudioOutput **ao, const char *name, int rate, int chann
     {
       IAudioOutput* audio_out=audio_out_drivers[i];
 
-      rc = audio_out->init(rate,channels,format,flags);
+      rc = audio_out->init(rate,channels,format,delay,flags);
       if (V_SUCCESS(rc))
         {
           *ao = audio_out; /* succeeded! */

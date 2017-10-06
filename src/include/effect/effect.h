@@ -44,7 +44,7 @@ public:
   virtual int init(int flags)=0;
   virtual int uninit(int flags)=0;
   virtual int reset()=0;
-  virtual int process(Sample_t *buff[], size_t nsamples)=0;
+  virtual int process(Sample_t *buff, size_t nsamples)=0;
 
   virtual void bypass(bool y)
   {
@@ -95,7 +95,7 @@ public:
   int init(int flags);
   int uninit(int flags);
   int reset();
-  int process(Sample_t *buff[], size_t nsamples);
+  int process(Sample_t *buff, size_t nsamples);
   void gate(bool gate);
 
   int getParameterCount();
@@ -161,7 +161,7 @@ public:
   int init(int flags);
   int uninit(int flags);
   int reset();
-  int process(Sample_t *buff[], size_t nsamples);
+  int process(Sample_t *buff, size_t nsamples);
   void gate(bool gate);
 
   int getParameterCount();
@@ -202,7 +202,7 @@ public:
   int init(int flags);
   int uninit(int flags);
   int reset();
-  int process(Sample_t *buff[], size_t nsamples);
+  int process(Sample_t *buff, size_t nsamples);
   void gate(bool gate);
 
   int getParameterCount();
@@ -256,7 +256,7 @@ public:
   int init(int flags);
   int uninit(int flags);
   int reset();
-  int process(Sample_t *buff[], size_t nsamples);
+  int process(Sample_t *buff, size_t nsamples);
   void gate(bool gate);
 
   int getParameterCount();
@@ -310,7 +310,7 @@ public:
   int init(int flags);
   int uninit(int flags);
   int reset();
-  int process(Sample_t *buff[], size_t nsamples);
+  int process(Sample_t *buff, size_t nsamples);
   void gate(bool gate);
 
   int getParameterCount();

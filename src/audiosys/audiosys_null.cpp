@@ -55,7 +55,7 @@ public:
 
     // open & setup audio device
     // return: 1=success 0=fail
-    int init(int rate,int channels,int format,int flags){
+    int init(int rate,int channels,int format, float delay, int flags){
 
         m_buffersize= 65536;
         m_outburst=1024;

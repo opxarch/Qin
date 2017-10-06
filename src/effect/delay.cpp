@@ -279,24 +279,18 @@ DelayImpl::gate(bool gate)
 
 /**
  * Process the audio buffer.
- * @param values      Pointer to the target buffer. The 1st
- *                    dimension of this array specifies the index of
- *                    sample value, while the 2rd dimension specifies
- *                    the channel index. eg. values[0][1] is the 1st value
- *                    in channel #2.
+ * @param buff        Pointer to the target buffer.
  * @param nframes     How many frames are there in the target buffer.
  * @return status code.
  */
 int
-DelayImpl::process(Sample_t *values[], size_t nframes)
+DelayImpl::process(Sample_t *buff, size_t nframes)
 {
   register int64_t  sample;
   register int      n = 0;
   register int64_t  delayed_sample;
   int               cursor;
   ringBuffer        *rb;
-  Sample_t          *buff = *values;
-  
   
   if (m_bypass) return VINF_SUCCEEDED;
 

@@ -42,6 +42,8 @@
 // to adjust level
 #define COMP_LEVEL(src, lev) (src = (src)*(lev) / 128)
 
+#define DEBUG_LEVEL 0
+
 ////////////////////////////////////////////////////////////////////////////////
 
 namespace wavetable {
@@ -355,10 +357,11 @@ WaveTable::parseSynTable(FILE *fp)
 /*
  * Send a MIDI event to the polyphonic unit.
  * @param event         Reference of the source event.
+ * @param poly          Optionally, Where to store the index of polyphony unit.
  * @return status code.
  */
 int
-WaveTable::SendMIDIEvent(const midi::Event &event)
+WaveTable::SendMIDIEvent(const midi::Event &event, int *poly)
 {
   /*
    * Filter the MIDI events
@@ -455,8 +458,12 @@ WaveTable::SendMIDIEvent(const midi::Event &event)
   m_units[nPoly].remain = ws->m_size;
   m_units[nPoly].size = ws->m_size;
 
+#if DEBUG_LEVEL > 1
   LOG(INFO) << "sample:" << ws->m_name << " velocity = " << (uint32_t)ws->m_dynamics << " level = " << level << "\n";
+#endif
 
+  if (poly)
+    *poly = nPoly;
   return VINF_SUCCEEDED;
 }
 
@@ -534,6 +541,17 @@ int
 WaveTable::GetPipeChannelNum()
 {
   return _MAX_POLYPHONY_NUM;
+}
+
+/**
+ * Query whether the pipe is busy.
+ * @return true if it is.
+ */
+bool
+WaveTable::PipeBusy(int index)
+{
+  V_ASSERT(index >= 0 && index < _MAX_POLYPHONY_NUM);
+  return m_units[index].busy;
 }
 
 /**

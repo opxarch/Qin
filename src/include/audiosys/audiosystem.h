@@ -32,7 +32,7 @@ public:
     IAudioOutput();
     virtual ~IAudioOutput();
 
-    virtual int init(int rate, int channels, int format, int flags)=0;
+    virtual int init(int rate, int channels, int format, float delay, int flags)=0;
     virtual int uninit(int flags)=0;
     virtual int reset()=0;
     virtual int get_space(void)=0;
@@ -87,7 +87,7 @@ class AudioSystem {
 public:
   void dumpDeviceList(void);
 
-  int initDevice(IAudioOutput **ao, const char *name, int rate, int channels, int format, int flags);
+  int initDevice(IAudioOutput **ao, const char *name, int rate, int channels, int format, float delay, int flags);
   int uninitDevice(IAudioOutput *func, int flags);
 
   IAudioOutput *getCurrentDevice();

@@ -180,10 +180,11 @@ public:
    * @param rate samplerate
    * @param channels number of channels
    * @param format format
+   * @param delay the length of buffer counted by time (msec).
    * @param flags unused
    * @return status code.
   */
-  int init(int rate, int channels, int format, int flags)
+  int init(int rate, int channels, int format, float delay, int flags)
   {
     int res;
     if (!InitDirectSound()) return 0;
@@ -210,7 +211,7 @@ public:
     m_samplerate = rate;
     m_format = format;
     m_bps = channels * rate * (af_fmt2bits(format)>>3);
-    if(m_buffersize==-1) m_buffersize = 21334; //m_bps; // space for 1 sec
+    if(m_buffersize==-1) m_buffersize = m_bps * delay / 1000;
 
     LOG(VERBOSE)
         << "ao_dsound: Samplerate:" << rate << "Hz " << "\n"

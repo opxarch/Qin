@@ -149,12 +149,13 @@ public:
   int uninit();
 
   int LoadTimbres(const char *path);
-  int SendMIDIEvent(const midi::Event &event);
+  int SendMIDIEvent(const midi::Event &event, int *poly);
   int GetSampleRate();
   int GetSampleFormat();
   int GetBps();
   int GetChannels();
   int GetPipeChannelNum();
+  bool PipeBusy(int index);
   int ReadPipeChannel(int index, void *ori, Sample_t *buff, size_t nsamples);
 
 private:

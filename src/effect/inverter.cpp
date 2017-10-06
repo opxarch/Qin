@@ -215,16 +215,12 @@ InverterImpl::gate(bool gate)
 
 /**
  * Process the audio buffer.
- * @param values      Pointer to the target buffer. The 1st
- *                    dimension of this array specifies the index of
- *                    sample value, while the 2rd dimension specifies
- *                    the channel index. eg. values[0][1] is the 1st value
- *                    in channel #2.
+ * @param buff        Pointer to the target buffer.
  * @param nframes     How many frames are there in the target buffer.
  * @return status code.
  */
 int
-InverterImpl::process(Sample_t *values[], size_t nframes)
+InverterImpl::process(Sample_t *buff, size_t nframes)
 {
   register Sample_t sample;
 
@@ -232,8 +228,6 @@ InverterImpl::process(Sample_t *values[], size_t nframes)
     return VINF_SUCCEEDED;
 
   V_ASSERT(m_channels == 2);
-
-  Sample_t *buff = *values;
 
   while ( nframes-- )
     {

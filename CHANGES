@@ -1,0 +1,7 @@
+FIXUPS:
+
+fixup: #171006001:
+1. Delay time counted audio buffer size.
+2. Effectors can receive the GATE signals now.
+3. Remove the invalid audio buffer parameters.
+3. Remove the extra logging codes.

@@ -145,7 +145,7 @@ Effectors::processGroup(int nPoly, Sample_t *buff, size_t nsamples, size_t chann
 
   for (IEffector *e = slots.root; e; e = e->next)
     {
-      rc = e->process(&buff, nsamples / channels);
+      rc = e->process(buff, nsamples / channels);
       if (V_FAILURE(rc)) return rc;
     }
 
@@ -167,7 +167,7 @@ Effectors::processInstrument(Sample_t *buff, size_t nsamples, size_t channels)
 
   for (IEffector *e = m_slotsInstrument.root; e; e = e->next)
     {
-      rc = e->process(&buff, nsamples / channels);
+      rc = e->process(buff, nsamples / channels);
       if (V_FAILURE(rc)) return rc;
     }
 
