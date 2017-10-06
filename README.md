@@ -10,10 +10,6 @@
 Qin是一种开源硬件。作为数字合成器，它能生成类似古筝音色的乐音。同时，它内置常见效果器，
 能满足编曲或演奏的一般需求。
 
-目前，我们正准备在MT7688平台上实现这一想法。Qin每根弦的物理振动将转化电阻的改变，控制运放输入电平，其输出通过A/D转换器采样，交给ATMEGA8处理。振动信号通过整形、数字滤波后，交由SCM计算出力度值，封装为MIDI信号发送给MT7688。
-
-除了在嵌入式平台实现外，我们还计划实现VSTi版本。可在Cubase，FL Studio等几乎所有数字音频工作站上使用。
-
 模块列表：
 1. Wavetable: 波表，存储波形采样数据。
 
@@ -32,9 +28,19 @@ Qin是一种开源硬件。作为数字合成器，它能生成类似古筝音�
 5. samples/cmp: 采样库编译器，用于生成Qin所识别的文件。
 
 
+![framework](https://raw.githubusercontent.com/opxarch/privdats/master/Qin/framework.jpg)
+
+
+项目概况
+---
+目前，我们正准备在MT7688平台上实现这一想法。Qin每根弦的物理振动将转化电阻的改变，控制运放输入电平，其输出通过A/D转换器采样，交给ATMEGA8处理。振动信号通过整形、数字滤波后，交由SCM计算出力度值，封装为MIDI信号发送给MT7688。
+
+除了在嵌入式平台实现外，我们还计划实现VSTi版本。可在Cubase，FL Studio等几乎所有数字音频工作站上使用。
+
+
 特性
 ---
-* 24bit/64kHz 录音室音质，2 GB采样库。
+* 24bit/64kHz 录音室音质，2 GB采样库，5级力度分层采样。
 * 支持16复音。
 * DFD (直接硬盘读取)，有效减少内存占用。
 
@@ -69,7 +75,7 @@ There are some modules included by the synthesizer:
 
 Features
 ---
-* 24bit/64kHz studio sampling sources, more than 2 GB library.
+* 24bit/64kHz studio sampling sources, more than 2 GB library with 5 levels velocities.
 * Maximum 16 polophony units.
 * DFD (direct from disc) tech used for reading the samples.
 
