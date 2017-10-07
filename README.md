@@ -5,8 +5,6 @@
 
 (there is an English version of this text as well)
 
-数字乐音合成器 Qin-2
-
 Qin是一种开源硬件。作为数字合成器，它能生成类似古筝音色的乐音。同时，它内置常见效果器，
 能满足编曲或演奏的一般需求。
 
