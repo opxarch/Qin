@@ -10,6 +10,11 @@
 Qin是一种开源硬件。作为数字合成器，它能生成类似古筝音色的乐音。同时，它内置常见效果器，
 能满足编曲或演奏的一般需求。
 
+
+![framework](https://raw.githubusercontent.com/opxarch/privdats/master/Qin/framework.jpg)
+figure-1 (framework of Qin)
+
+
 模块列表：
 1. Wavetable: 波表，存储波形采样数据。
 
@@ -26,9 +31,6 @@ Qin是一种开源硬件。作为数字合成器，它能生成类似古筝音�
 4. audiosys: 音频接口系统。
 
 5. samples/cmp: 采样库编译器，用于生成Qin所识别的文件。
-
-
-![framework](https://raw.githubusercontent.com/opxarch/privdats/master/Qin/framework.jpg)
 
 
 项目概况
