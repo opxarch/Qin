@@ -17,9 +17,6 @@
  *  Lesser General Public License for more details.
  */
 
-/*******************************************************************************
-*   Header Files                                                               *
-*******************************************************************************/
 #include <cstring>
 #include <ctime>
 #include "util/error.h"

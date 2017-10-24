@@ -8,3 +8,6 @@ fixup: #171006001:
 
 fixup: #171024001:
 1. changed the layout of source directions, and fixed up the Makefiles accordingly.
+
+fixup: #171024002:
+1. adjust for the better coding sytles.

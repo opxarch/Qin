@@ -20,6 +20,9 @@
  *  Lesser General Public License for more details.
  */
 
+/*******************************************************************************
+*   Header Files                                                               *
+*******************************************************************************/
 #include <new>
 #include <cstdlib>
 
@@ -28,6 +31,10 @@
 #include "util/error.h"
 
 #include "memory/mmu.h"
+
+/*******************************************************************************
+*   Typedefs and structures                                                    *
+*******************************************************************************/
 
 /*
  * Memory track header
@@ -43,6 +50,11 @@ struct MEMTRACKHDR
 };
 
 #define MEMBLOCK_MAGIC (0x514d424b)
+
+
+/*******************************************************************************
+*   Global Variables                                                           *
+*******************************************************************************/
 
 static std::size_t  bytesMemAllocated[_MAX_MEM_TAG_NUM] = {0};
 static char *reservedMem = 0;

@@ -17,9 +17,6 @@
  *  Lesser General Public License for more details.
  */
 
-/*******************************************************************************
-*   Header Files                                                               *
-*******************************************************************************/
 #include "util/timer.h"
 #include "util/misc.h"
 #include "util/error.h"

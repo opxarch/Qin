@@ -17,10 +17,6 @@
  *  Lesser General Public License for more details.
  */
 
-/*******************************************************************************
-*   Header Files                                                               *
-*******************************************************************************/
-
 #include "dsp/effect.h"
 #include "util/misc.h"
 #include "util/error.h"

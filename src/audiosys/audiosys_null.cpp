@@ -17,9 +17,6 @@
  *  Lesser General Public License for more details.
  */
 
-/*******************************************************************************
-*   Header Files                                                               *
-*******************************************************************************/
 #include <cstdio>
 #include <cstdlib>
 #include <sys/time.h>

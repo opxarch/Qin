@@ -17,9 +17,6 @@
  *  Lesser General Public License for more details.
  */
 
-/*******************************************************************************
-*   Header Files                                                               *
-*******************************************************************************/
 #include "util/error.h"
 
 #include "midi/note.h"

@@ -17,9 +17,6 @@
  *  Lesser General Public License for more details.
  */
 
-/*******************************************************************************
-*   Header Files                                                               *
-*******************************************************************************/
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
