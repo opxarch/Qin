@@ -29,8 +29,8 @@
 #include "memory/mmu.h"
 #include "wavetable/wavetable.h"
 #include "mixer/mixer.h"
-#include "effect/effect.h"
 #include "audiosys/audiosystem.h"
+#include "dsp/effect.h"
 #include "midi/ports.h"
 #include "midi/message.h"
 #include "midi/mapping.h"
@@ -47,7 +47,7 @@ int main(int argc, char *argv[])
   wavetable::WaveTable      *wavetable;
   mixer::Mixer              *mixer;
   audiosys::AudioSystem     *audiosys;
-  effect::Effectors         *effects;
+  dsp::Effectors         *effects;
   midi::Ports               *ports;
   mididev::MidiDev          *mdev;
 
@@ -61,7 +61,7 @@ int main(int argc, char *argv[])
   wavetable = new wavetable::WaveTable;
   mixer     = new mixer::Mixer;
   audiosys  = new audiosys::AudioSystem;
-  effects   = new effect::Effectors;
+  effects   = new dsp::Effectors;
   ports     = new midi::Ports;
   mdev      = new mididev::MidiDev;
 
@@ -231,8 +231,8 @@ int main(int argc, char *argv[])
                * Create effectors.
                */
               rc = effects->add(
-                  effect::EFFECT_SCOPE_GROUP,
-                  effect::ADSRImpl(rate, channels));
+                  dsp::EFFECT_SCOPE_GROUP,
+                  dsp::ADSRImpl(rate, channels));
 
               if (V_FAILURE(rc))
                 {

@@ -44,12 +44,12 @@ OBJS =  util/error.cpp.o                    \
 		midi/ports.cpp.o					\
 		midi/message.cpp.o					\
 		memory/mmu.cpp.o					\
-		effect/adsr.cpp.o					\
-		effect/amplifier.cpp.o				\
-		effect/filter.cpp.o					\
-		effect/delay.cpp.o					\
-		effect/inverter.cpp.o				\
-		effect/effectors.cpp.o				\
+		dsp/adsr.cpp.o						\
+		dsp/amplifier.cpp.o					\
+		dsp/filter.cpp.o					\
+		dsp/delay.cpp.o						\
+		dsp/inverter.cpp.o					\
+		dsp/effectors.cpp.o					\
         main.cpp.o							\
         
 #LIBS += winmm
@@ -83,7 +83,7 @@ util/error.cpp.o: $(ROOT_DIR)/$(OUT_DIR)/errors-generated.h
 
 $(ROOT_DIR)/$(OUT_DIR)/errors-generated.h: \
 		util/errors.sed \
-		$(ROOT_DIR)/src/include/util/error.h
+		$(ROOT_DIR)/include/util/error.h
         
 	$(call run-command,$(SED) -f $< $(filter %.h,$^) > $@,"  SED      $@")
 

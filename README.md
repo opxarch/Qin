@@ -10,7 +10,7 @@ Qin是一种开源硬件。作为数字合成器，它能生成类似古筝音�
 
 
 ![framework](https://raw.githubusercontent.com/opxarch/privdats/master/Qin/framework.jpg)
-figure-1 (framework of Qin)
+图-1 (framework of Qin)
 
 
 模块列表：
@@ -19,14 +19,16 @@ figure-1 (framework of Qin)
 2. Effectors:
 * (1). amplifier: 数字放大器, 增益可调。
 * (2). adsr: 振幅包络调制器。Attack/Decay/Sustain/Release可调。
-* (3). filter: 滤波器。基于butterworth算法。支持低通、高通、带通、陷波。
+* (3). filter: 滤波器。基于butterworth型IIR滤波器。低通、高通、带通、陷波。
 * (4). delay: 延迟效果器。可调反馈系数，延迟采样数。
-* (5). inverter: 反转器。反转L/R波形或相位。
+* (5). inverter: 反转器。调整L/R波形或相位。
 
 3. midi: MIDI信号处理（译码，音符映射）。
 4. mididev: MIDI Controller驱动。
 3. mixer: 实现了多路软件混音，带有简单的clip。
 4. audiosys: 音频接口系统。
+
+5. memory: 内存管理单元。
 
 5. samples/cmp: 采样库编译器，用于生成Qin所识别的文件。
 
@@ -52,8 +54,8 @@ What is QIN ?
 ---
 
 Qin is an open-source instrument synthesizer that could simulate the sound
-of Chinese Guzheng. It receives the MIDI event from the controller, and
-generates the sound through some procedures.
+of Chinese Guzheng. It receives the MIDI events from controller, and
+generates the sound through digital procedures.
 
 There are some modules included by the synthesizer:
 1. Wavetable : Stores the wave samples of guzheng.
@@ -61,7 +63,7 @@ There are some modules included by the synthesizer:
 2. Effectors:
 * (1). amplifier:     Amplifier with adjustable Gain.
 * (2). adsr:          Amplitude envelope modulator, 5-sections: Attack, Decay, Sustain, Release.
-* (3). filter:        Filter based on butterworth algorithm, supported Low-pass, High-pass, Band-pass and Band-trap.
+* (3). filter:        An IIR Filter, which based on the butterworth model, supported Low-pass, High-pass, Band-pass and Band-trap.
 * (4). delay:         Delay effect with adjustable Feedback and Gain.
 * (5). inverter:      Invert the L/R channel waves or phases.
 
@@ -71,7 +73,9 @@ There are some modules included by the synthesizer:
 3. mixer: Multiple-ways audio mixing with a simple clip.
 4. audiosys: Audio interface system.
 
-5. samples/cmp: a compiler for the sample library, which generates the file Qin supports.
+5. memory: memory management unit.
+
+6. samples/cmp: a compiler for the sample library, which generates the file Qin supports.
 
 Features
 ---
