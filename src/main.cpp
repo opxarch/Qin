@@ -17,6 +17,9 @@
  *  Lesser General Public License for more details.
  */
 
+/*******************************************************************************
+*   Header Files                                                               *
+*******************************************************************************/
 #include <cstring>
 #include <ctime>
 #include "util/error.h"
@@ -44,7 +47,7 @@ int main(int argc, char *argv[])
   wavetable::WaveTable      *wavetable;
   mixer::Mixer              *mixer;
   audiosys::AudioSystem     *audiosys;
-  dsp::Effectors         *effects;
+  dsp::Effectors            *effects;
   midi::Ports               *ports;
   mididev::MidiDev          *mdev;
 
